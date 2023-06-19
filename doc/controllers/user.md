@@ -15,11 +15,11 @@ $userController = $client->getUserController();
 ## Methods
 
 * [Create Users With Array Input](../../doc/controllers/user.md#create-users-with-array-input)
+* [Create Users With List Input](../../doc/controllers/user.md#create-users-with-list-input)
 * [Get User by Name](../../doc/controllers/user.md#get-user-by-name)
+* [Update User](../../doc/controllers/user.md#update-user)
 * [Delete User](../../doc/controllers/user.md#delete-user)
 * [Login User](../../doc/controllers/user.md#login-user)
-* [Create Users With List Input](../../doc/controllers/user.md#create-users-with-list-input)
-* [Update User](../../doc/controllers/user.md#update-user)
 * [Logout User](../../doc/controllers/user.md#logout-user)
 * [Create User](../../doc/controllers/user.md#create-user)
 
@@ -50,6 +50,41 @@ $body = [
 ];
 
 $userController->createUsersWithArrayInput($body);
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | successful operation | `ApiException` |
+
+
+# Create Users With List Input
+
+Creates list of users with given input array
+
+```php
+function createUsersWithListInput(array $body): void
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`User[]`](../../doc/models/user.md) | Body, Required | List of user object |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```php
+$body = [
+    UserBuilder::init()->build()
+];
+
+$userController->createUsersWithListInput($body);
 ```
 
 ## Errors
@@ -90,6 +125,46 @@ $result = $userController->getUserByName($username);
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Invalid username supplied | `ApiException` |
+| 404 | User not found | `ApiException` |
+
+
+# Update User
+
+This can only be done by the logged in user.
+
+```php
+function updateUser(string $username, User $body): void
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `username` | `string` | Template, Required | name that need to be updated |
+| `body` | [`User`](../../doc/models/user.md) | Body, Required | Updated user object |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```php
+$username = 'username0';
+
+$body = UserBuilder::init()->build();
+
+$userController->updateUser(
+    $username,
+    $body
+);
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Invalid user supplied | `ApiException` |
 | 404 | User not found | `ApiException` |
 
 
@@ -164,81 +239,6 @@ $result = $userController->loginUser(
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Invalid username/password supplied | `ApiException` |
-
-
-# Create Users With List Input
-
-Creates list of users with given input array
-
-```php
-function createUsersWithListInput(array $body): void
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`User[]`](../../doc/models/user.md) | Body, Required | List of user object |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```php
-$body = [
-    UserBuilder::init()->build()
-];
-
-$userController->createUsersWithListInput($body);
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| Default | successful operation | `ApiException` |
-
-
-# Update User
-
-This can only be done by the logged in user.
-
-```php
-function updateUser(string $username, User $body): void
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `username` | `string` | Template, Required | name that need to be updated |
-| `body` | [`User`](../../doc/models/user.md) | Body, Required | Updated user object |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```php
-$username = 'username0';
-
-$body = UserBuilder::init()->build();
-
-$userController->updateUser(
-    $username,
-    $body
-);
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Invalid user supplied | `ApiException` |
-| 404 | User not found | `ApiException` |
 
 
 # Logout User

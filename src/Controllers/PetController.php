@@ -26,26 +26,6 @@ use SwaggerPetstoreLib\Utils\FileWrapper;
 class PetController extends BaseController
 {
     /**
-     * Add a new pet to the store
-     *
-     * @param Pet $body Pet object that needs to be added to the store
-     *
-     * @return void Response from the API call
-     *
-     * @throws ApiException Thrown if API call fails
-     */
-    public function inpet(Pet $body): void
-    {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/pet')
-            ->auth('global')
-            ->parameters(BodyParam::init($body), HeaderParam::init('Content-Type', 'application/json'));
-
-        $_resHandler = $this->responseHandler()->throwErrorOn('405', ErrorType::init('Invalid input'));
-
-        $this->execute($_reqBuilder, $_resHandler);
-    }
-
-    /**
      * uploads an image
      *
      * @param int $petId ID of pet to update
@@ -69,6 +49,26 @@ class PetController extends BaseController
         $_resHandler = $this->responseHandler()->type(ApiResponse::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
+    }
+
+    /**
+     * Add a new pet to the store
+     *
+     * @param Pet $body Pet object that needs to be added to the store
+     *
+     * @return void Response from the API call
+     *
+     * @throws ApiException Thrown if API call fails
+     */
+    public function inpet(Pet $body): void
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/pet')
+            ->auth('global')
+            ->parameters(BodyParam::init($body), HeaderParam::init('Content-Type', 'application/json'));
+
+        $_resHandler = $this->responseHandler()->throwErrorOn('405', ErrorType::init('Invalid input'));
+
+        $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**
@@ -166,29 +166,6 @@ class PetController extends BaseController
     }
 
     /**
-     * Deletes a pet
-     *
-     * @param int $petId Pet id to delete
-     * @param string|null $apiKey
-     *
-     * @return void Response from the API call
-     *
-     * @throws ApiException Thrown if API call fails
-     */
-    public function deletePet(int $petId, ?string $apiKey = null): void
-    {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::DELETE, '/pet/{petId}')
-            ->auth('global')
-            ->parameters(TemplateParam::init('petId', $petId), HeaderParam::init('api_key', $apiKey));
-
-        $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init('Invalid ID supplied'))
-            ->throwErrorOn('404', ErrorType::init('Pet not found'));
-
-        $this->execute($_reqBuilder, $_resHandler);
-    }
-
-    /**
      * Updates a pet in the store with form data
      *
      * @param int $petId ID of pet that needs to be updated
@@ -211,6 +188,29 @@ class PetController extends BaseController
             );
 
         $_resHandler = $this->responseHandler()->throwErrorOn('405', ErrorType::init('Invalid input'));
+
+        $this->execute($_reqBuilder, $_resHandler);
+    }
+
+    /**
+     * Deletes a pet
+     *
+     * @param int $petId Pet id to delete
+     * @param string|null $apiKey
+     *
+     * @return void Response from the API call
+     *
+     * @throws ApiException Thrown if API call fails
+     */
+    public function deletePet(int $petId, ?string $apiKey = null): void
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::DELETE, '/pet/{petId}')
+            ->auth('global')
+            ->parameters(TemplateParam::init('petId', $petId), HeaderParam::init('api_key', $apiKey));
+
+        $_resHandler = $this->responseHandler()
+            ->throwErrorOn('400', ErrorType::init('Invalid ID supplied'))
+            ->throwErrorOn('404', ErrorType::init('Pet not found'));
 
         $this->execute($_reqBuilder, $_resHandler);
     }

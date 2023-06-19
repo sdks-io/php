@@ -12,23 +12,23 @@ Find out more about Swagger: [http://swagger.io](http://swagger.io)
 Run the following command to install the package and automatically add the dependency to your composer.json file:
 
 ```php
-composer require "apimatic/repo-test-sdk:1.0.7"
+composer require "apimatic/repo-test-sdk:2.3.5"
 ```
 
 Or add it to the composer.json file manually as given below:
 
 ```php
 "require": {
-    "apimatic/repo-test-sdk": "1.0.7"
+    "apimatic/repo-test-sdk": "2.3.5"
 }
 ```
 
 You can also view the package at:
-https://packagist.org/packages/apimatic/repo-test-sdk#1.0.7
+https://packagist.org/packages/apimatic/repo-test-sdk#2.3.5
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/php/tree/1.0.7/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/sdks-io/php/tree/2.3.5/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -61,14 +61,14 @@ This API uses `Custom Authentication`.
 
 ## List of APIs
 
-* [Pet](https://www.github.com/sdks-io/php/tree/1.0.7/doc/controllers/pet.md)
-* [Store](https://www.github.com/sdks-io/php/tree/1.0.7/doc/controllers/store.md)
-* [User](https://www.github.com/sdks-io/php/tree/1.0.7/doc/controllers/user.md)
+* [Pet](https://www.github.com/sdks-io/php/tree/2.3.5/doc/controllers/pet.md)
+* [Store](https://www.github.com/sdks-io/php/tree/2.3.5/doc/controllers/store.md)
+* [User](https://www.github.com/sdks-io/php/tree/2.3.5/doc/controllers/user.md)
 
 ## Classes Documentation
 
-* [Utility Classes](https://www.github.com/sdks-io/php/tree/1.0.7/doc/utility-classes.md)
-* [ApiException](https://www.github.com/sdks-io/php/tree/1.0.7/doc/api-exception.md)
-* [HttpRequest](https://www.github.com/sdks-io/php/tree/1.0.7/doc/http-request.md)
-* [HttpResponse](https://www.github.com/sdks-io/php/tree/1.0.7/doc/http-response.md)
+* [Utility Classes](https://www.github.com/sdks-io/php/tree/2.3.5/doc/utility-classes.md)
+* [ApiException](https://www.github.com/sdks-io/php/tree/2.3.5/doc/api-exception.md)
+* [HttpRequest](https://www.github.com/sdks-io/php/tree/2.3.5/doc/http-request.md)
+* [HttpResponse](https://www.github.com/sdks-io/php/tree/2.3.5/doc/http-response.md)
 

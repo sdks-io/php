@@ -43,20 +43,6 @@ class StoreController extends BaseController
     }
 
     /**
-     * Returns a map of status codes to quantities
-     *
-     * @return array<string,int> Response from the API call
-     *
-     * @throws ApiException Thrown if API call fails
-     */
-    public function getInventory(): array
-    {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/store/inventory')->auth('global');
-
-        return $this->execute($_reqBuilder);
-    }
-
-    /**
      * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated
      * exceptions
      *
@@ -101,5 +87,19 @@ class StoreController extends BaseController
             ->throwErrorOn('404', ErrorType::init('Order not found'));
 
         $this->execute($_reqBuilder, $_resHandler);
+    }
+
+    /**
+     * Returns a map of status codes to quantities
+     *
+     * @return array<string,int> Response from the API call
+     *
+     * @throws ApiException Thrown if API call fails
+     */
+    public function getInventory(): array
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::GET, '/store/inventory')->auth('global');
+
+        return $this->execute($_reqBuilder);
     }
 }

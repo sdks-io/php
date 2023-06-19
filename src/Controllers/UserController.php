@@ -42,6 +42,26 @@ class UserController extends BaseController
     }
 
     /**
+     * Creates list of users with given input array
+     *
+     * @param User[] $body List of user object
+     *
+     * @return void Response from the API call
+     *
+     * @throws ApiException Thrown if API call fails
+     */
+    public function createUsersWithListInput(array $body): void
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/user/createWithList')
+            ->auth('global')
+            ->parameters(BodyParam::init($body), HeaderParam::init('Content-Type', 'application/json'));
+
+        $_resHandler = $this->responseHandler()->throwErrorOn('0', ErrorType::init('successful operation'));
+
+        $this->execute($_reqBuilder, $_resHandler);
+    }
+
+    /**
      * Get user by user name
      *
      * @param string $username The name that needs to be fetched. Use user1 for testing.
@@ -62,6 +82,33 @@ class UserController extends BaseController
             ->type(User::class);
 
         return $this->execute($_reqBuilder, $_resHandler);
+    }
+
+    /**
+     * This can only be done by the logged in user.
+     *
+     * @param string $username name that need to be updated
+     * @param User $body Updated user object
+     *
+     * @return void Response from the API call
+     *
+     * @throws ApiException Thrown if API call fails
+     */
+    public function updateUser(string $username, User $body): void
+    {
+        $_reqBuilder = $this->requestBuilder(RequestMethod::PUT, '/user/{username}')
+            ->auth('global')
+            ->parameters(
+                TemplateParam::init('username', $username),
+                BodyParam::init($body),
+                HeaderParam::init('Content-Type', 'application/json')
+            );
+
+        $_resHandler = $this->responseHandler()
+            ->throwErrorOn('400', ErrorType::init('Invalid user supplied'))
+            ->throwErrorOn('404', ErrorType::init('User not found'));
+
+        $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**
@@ -106,53 +153,6 @@ class UserController extends BaseController
             ->throwErrorOn('400', ErrorType::init('Invalid username/password supplied'));
 
         return $this->execute($_reqBuilder, $_resHandler);
-    }
-
-    /**
-     * Creates list of users with given input array
-     *
-     * @param User[] $body List of user object
-     *
-     * @return void Response from the API call
-     *
-     * @throws ApiException Thrown if API call fails
-     */
-    public function createUsersWithListInput(array $body): void
-    {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::POST, '/user/createWithList')
-            ->auth('global')
-            ->parameters(BodyParam::init($body), HeaderParam::init('Content-Type', 'application/json'));
-
-        $_resHandler = $this->responseHandler()->throwErrorOn('0', ErrorType::init('successful operation'));
-
-        $this->execute($_reqBuilder, $_resHandler);
-    }
-
-    /**
-     * This can only be done by the logged in user.
-     *
-     * @param string $username name that need to be updated
-     * @param User $body Updated user object
-     *
-     * @return void Response from the API call
-     *
-     * @throws ApiException Thrown if API call fails
-     */
-    public function updateUser(string $username, User $body): void
-    {
-        $_reqBuilder = $this->requestBuilder(RequestMethod::PUT, '/user/{username}')
-            ->auth('global')
-            ->parameters(
-                TemplateParam::init('username', $username),
-                BodyParam::init($body),
-                HeaderParam::init('Content-Type', 'application/json')
-            );
-
-        $_resHandler = $this->responseHandler()
-            ->throwErrorOn('400', ErrorType::init('Invalid user supplied'))
-            ->throwErrorOn('404', ErrorType::init('User not found'));
-
-        $this->execute($_reqBuilder, $_resHandler);
     }
 
     /**

@@ -13,9 +13,9 @@ $storeController = $client->getStoreController();
 ## Methods
 
 * [Place Order](../../doc/controllers/store.md#place-order)
-* [Get Inventory](../../doc/controllers/store.md#get-inventory)
 * [Get Order by Id](../../doc/controllers/store.md#get-order-by-id)
 * [Delete Order](../../doc/controllers/store.md#delete-order)
+* [Get Inventory](../../doc/controllers/store.md#get-inventory)
 
 
 # Place Order
@@ -49,25 +49,6 @@ $result = $storeController->placeOrder($body);
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Invalid Order | `ApiException` |
-
-
-# Get Inventory
-
-Returns a map of status codes to quantities
-
-```php
-function getInventory(): array
-```
-
-## Response Type
-
-`array<string,int>`
-
-## Example Usage
-
-```php
-$result = $storeController->getInventory();
-```
 
 
 # Get Order by Id
@@ -136,4 +117,23 @@ $storeController->deleteOrder($orderId);
 |  --- | --- | --- |
 | 400 | Invalid ID supplied | `ApiException` |
 | 404 | Order not found | `ApiException` |
+
+
+# Get Inventory
+
+Returns a map of status codes to quantities
+
+```php
+function getInventory(): array
+```
+
+## Response Type
+
+`array<string,int>`
+
+## Example Usage
+
+```php
+$result = $storeController->getInventory();
+```
 
